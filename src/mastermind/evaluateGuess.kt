@@ -3,14 +3,7 @@ package mastermind
 data class Evaluation(val rightPosition: Int, val wrongPosition: Int)
 
 fun evaluateGuess(secret: String, guess: String): Evaluation {
-    fun String.getRights(s: String): Int {
-        var rights = 0
-        for ((index, character) in this.withIndex()) {
-            if (s[index] == character) rights++
-        }
-
-        return rights
-    }
+    fun String.getRights(s: String): Int = this.zip(s).count { (char1, char2) -> char1 == char2 }
 
     fun String.getWrongs(s: String): Int {
         val sA = mutableListOf<Char>()
